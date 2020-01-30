@@ -19,12 +19,13 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
   });
-    
+    sessionStorage.clear();
   }
   get formControls() { return this.loginForm.controls; }
   
-  login(){
+  Submit(f){
     console.log(this.loginForm.value);
+    sessionStorage.setItem('user', f.value.password)
     this.isSubmitted = true;
     if(this.loginForm.invalid){
       return;
@@ -32,5 +33,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value);
     this.router.navigateByUrl('/admin');
   }
+ 
+
 
 }
